@@ -37,11 +37,11 @@ alias ll
 
 But before you start venturing into eshell, you have to know what it **cannot** do. Most importantly, **eshell is not a real terminal**.
 
-Unlike Vim8, which spawns an internal terminal in the background, eshell is written purely in Emacs Lisp. 
+Unlike Vim8, which spawns an internal terminal in the background, eshell is written purely in Emacs Lisp.
 
-If the program you run in eshell wants to do some fancy stuff, it is likely to fail. For example, **top** is one of the programs that you cannot run in eshell. Nor can you use **ssh** . 
+If the program you run in eshell wants to do some fancy stuff, it is likely to fail. For example, **top** is one of the programs that you cannot run in eshell. Nor can you use **ssh** .
 
-Many users who want to run `git` in eshell will see the error message saying *the terminal is not fully functional*. Although it is always encouraged to use the unprecedented [Magit](https://magit.vc), you may just want to do some simple stuff with git in eshell, in which case you should run `git --no-pager ...` instead. 
+Many users who want to run `git` in eshell will see the error message saying *the terminal is not fully functional*. Although it is always encouraged to use the unprecedented [Magit](https://magit.vc), you may just want to do some simple stuff with git in eshell, in which case you should run `git --no-pager ...` instead.
 
 Alternatively, you can define an alias to save your figures.
 
@@ -49,7 +49,7 @@ Alternatively, you can define an alias to save your figures.
 alias git 'git --no-pager $*'
 {% endhighlight %}
 
-To start an internal terminal in Emacs, you should use `M-x term`. If you find your program does not work even in term, it is time that you should use a real terminal. Emacs is not almighty after all. 
+To start an internal terminal in Emacs, you should use `M-x term`. If you find your program does not work even in term, it is time that you should use a real terminal. Emacs is not almighty after all.
 
 In order to save your time potentially, I should tell you that I never succeed in running the fully functioning Vim in Emacs :-) So don't waste your time on it.
 
