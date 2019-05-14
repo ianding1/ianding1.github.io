@@ -36,8 +36,8 @@ navigation:
 disqus:
 
 # Author information - author info at the bottom of the post
-author_name: "Ian Ding"
-author_bio: "Ian Ding is a software engineer interested in programming language theories and their practical uses."
+author_name: "Ian"
+author_bio:
 author_url:  "http://ianding1.com"
 author_location:
 author_image:
