@@ -12,7 +12,7 @@ title: "IanDing1"
 description: "Ian Ding's blog on C++, Haskell, JavaScript, Python, Vim, Emacs, and etc."
 
 # Tagline near the site title
-tagline: "Principles, pragmatics and practice."
+tagline: "Principles, pragmatism and practice."
 
 # The subpath of your site, e.g. /blog, for generating urls
 baseurl: ""
@@ -29,7 +29,7 @@ navigation:
   url: /
 - text: About
   url: /about/
-- text: Archives
+- text: Tags
   url: /tags/
 
 # The shortname for your Disqus site to enable comments.
@@ -70,6 +70,7 @@ plugins:
 - jekyll-paginate
 
 permalink: pretty
-markdown: kramdown
-kramdown:
-    auto_ids: false
+markdown: redcarpet
+highlighter: pygments
+redcarpet:
+    extensions: ["no_intra_emphasis", "tables", "autolink", "strikethrough", "fenced_code_blocks", "disable_indented_code_blocks", "with_toc_data", "superscript", "underline", "highlight", "quote", "footnotes"]
