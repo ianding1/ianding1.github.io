@@ -2,7 +2,6 @@
 layout: post
 title: "Use Emacs as Your Terminal"
 date: 2018-10-18
-banner_image: use-emacs-as-your-terminal.jpg
 tags: [emacs]
 ---
 
