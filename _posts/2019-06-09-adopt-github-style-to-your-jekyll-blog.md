@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Adopt GitHub Style to Your Jekyll Blog"
-date: 2019-06-06
+date: 2019-06-09
 tags: [web]
 banner_image: jekyll-banner.jpg
 ---
