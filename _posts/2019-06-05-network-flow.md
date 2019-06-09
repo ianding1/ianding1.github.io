@@ -2,7 +2,7 @@
 layout: post
 title: "Network Flow"
 date: 2019-06-05
-banner_image: 
+banner_image: network-flow-banner.jpg
 tags: [algorithm]
 ---
 

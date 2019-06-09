@@ -3,6 +3,7 @@ layout: post
 title: "Use Emacs as Your Terminal"
 date: 2018-10-18
 tags: [emacs]
+banner_image: use-emacs-as-your-terminal.jpg
 ---
 
 If there is anything that Emacs can do but Vim can't, eshell must be one of them. What eshell distinguishes itself from an external terminal is that it is so deeply integrated into Emacs that you can do many things otherwise difficult. As a gentle start, all that you need to do is to run this command:

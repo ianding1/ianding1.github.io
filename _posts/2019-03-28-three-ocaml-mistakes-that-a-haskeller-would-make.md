@@ -3,6 +3,7 @@ layout: post
 title: "Three OCaml Mistakes That A Haskeller Would Make"
 date: 2019-03-28
 tags: [ocaml]
+banner_image: ocaml-banner.jpg
 ---
 
 # OCaml is not an indented language
