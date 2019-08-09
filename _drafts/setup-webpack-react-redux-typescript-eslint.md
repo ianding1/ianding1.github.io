@@ -27,6 +27,7 @@ eslintConfig not working if not ejected.
 
 3. What is **standard**?
 
+`npm install standard`
 A pre-configured eslint set.
 
 3. `npm install` vs `npm install -D`
