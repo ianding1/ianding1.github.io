@@ -6,42 +6,90 @@ tags: [web,typescript,react]
 banner_image:
 ---
 
-1. `npx create-react-app my-app-name --typescript --use-npm`
+This tutorial aims to help you setup a React + TypeScript project quickly. At
+the end of this tutorial, you will have:
 
-`--typescript` generates a typescript app instead of javascript.
+- Webpack + a development server + production build
+- React + Redux with *TypeScript*
+- Testing with *jest*
+- Loading *CSS* and *images* with `import` statement
+- Linting with *eslint*
+- Code formatting with *standard*
 
-`--use-npm` use npm rather yarn.
+## Create a project
+
+```sh
+npx create-react-app my-app-name --typescript --use-npm
+```
 
 It will create a directory named *my-app-name* in the current directory and use
-npm as the package manager (otherwise, it will use yarn).
+npm as the package manager. Note that it prevents you from using other naming
+styles than the hyphen form like `my-awesome-project`.
 
-What create-react-app provides?
+An explanation on the options:
+- `--typescript`: uses TypeScript rather than JavaScript.
+- `--use-npm`: uses npm rather than yarn.
 
-- typescript/css/image loading, all in src/
+The reason that we use create-react-app to set up the project is that it
+provides good build tools out of box, and in further you project will only have
+a single *build tool dependency* on react-scripts in package.json, which allows
+you to upgrade to newer build tools easily. (The library dependencies like react
+and typescript will still be managed in package.json, though)
+ 
+The build tools that it comes with include:
 
-2. Whether to use eject?
+- Webpack with CSS/image loader, code compressor, etc.
+- jest
+- eslint
 
-Mostly, no. Coding style consider using **standard**.
+A common question is whether to eject the build tools into your project?
 
-eslintConfig not working if not ejected.
+create-react-app hides all the build tools and configurations behind the package
+called react-scripts to allow for easy upgrades and cleaner dependencies, which,
+on the other hand, makes it impossible to customize them, one of which you might
+want to customize is eslint rules.
 
-3. What is **standard**?
+For those who wants more fine-grained control over the build tools, `npm run
+eject` expands the build tools and configurations into your project and gives
+you full control over them. However, it also makes it But I just find it unnecessary, since the
+default is good enough for most cases.
 
-`npm install standard`
-A pre-configured eslint set.
+**If you want a style checker in your project, it's best not to eject, rather
+use *standard*, which will be introduced later.**
 
-3. `npm install` vs `npm install -D`
+## Set up the style checker
 
-don't -D. since its frontend framework, all the deployed code are compiled and
-bundled before deployed.
+create-react-app comes with eslint, but it's used for *potential programmatic
+errors*, not style enforcement, since style checking by itself is not essential
+in the build process. But it's easy for us to set up a style checker, which I
+recommend using *standard*.
 
-4. How to install **standard**.
+The following sections are copied and pasted from its homepage, explaining the
+reason why I recommended it:
 
-`npm install standard @typescript-eslint/parser @typescript-eslint/eslint-plugin`
-(why not use --dev, since its frontend)
+> **Why should I use JavaScript Standard Style?**
+> Adopting standard style means ranking the importance of code clarity and
+> community conventions higher than personal style. This might not make sense
+> for 100% of projects and development cultures, however open source can be a
+> hostile place for newbies. Setting up clear, automated contributor
+> expectations makes a project healthier.
+>
+> **I disagree with rule X, can you change it?**
+> No. The whole point of standard is to save you time by avoiding bikeshedding
+> about code style. There are lots of debates online about tabs vs. spaces, etc.
+> that will never be resolved. These debates just distract from getting stuff
+> done. At the end of the day you have to 'just pick something', and that's the
+> whole philosophy of standard -- its a bunch of sensible 'just pick something'
+> opinions. Hopefully, users see the value in that over defending their own
+> opinions.
 
+If you decided to also use standard, you could install it by these steps:
 
-Add to *package.json*:
+```sh
+npm install standard @typescript-eslint/parser @typescript-eslint/eslint-plugin
+```
+
+And add the following lines into package.json:
 
 ```json
 {
@@ -50,79 +98,60 @@ Add to *package.json*:
     "plugins": ["@typescript-eslint/eslint-plugin"]
   },
   "scripts": {
+    /* Following existing scripts */
     "style": "standard \"src/**/*.ts\" \"src/**/*.tsx\"",
     "fix": "standard \"src/**/*.ts\" \"src/**/*.tsx\" --fix"
   }
 }
 ```
 
-Run `npm run style` to check style, run `npm run fix` to fix style issues.
+Now you can run `npm run style` to check style, and run `npm run fix` to format
+your code.
 
-Run `npm run style` once.
-
-Why I don't want semicolons?
-
-function myFunc() {
-// should not have semicolon
-}
-
-const myFunc = () {
-// should have semicolon
-};
-
-5. Hint:
-
-at the beginning of jest test file, add
-
-    /* eslint-env jest */
-
-src/serviceWorker.ts: fetch not found
-
-use window.fetch instead. Use window for all global objects instead, not just
-for fetch.
+Run `npm run style` once to format the boilerplate code.
 
 
-6. Redux:
+## Set up Redux
 
-please also check out mobx.
-
+```sh
 npm install redux react-redux @types/react-redux redux-thunk @types/redux-thunk
+```
 
-Read how to use typescript in redux:
+Redux provides an official tutorial on how to integrate Redux with TypeScript,
+please check it out [here][redux-typescript-doc].
 
-[official tutorial](https://redux.js.org/recipes/usage-with-typescript)
-[good practice](https://medium.com/@matthewgerstman/redux-with-code-splitting-and-type-checking-205195aded46)
+## Testing
 
-props:
-
-7. Testing with redux
+redux-mock-store is essential for you to test asynchronous action creators.
 
 ```shell
 npm install redux-mock-store @types/redux-mock-store
 ```
 
-Create mock store:
+The following code example shows how to write tests on asynchronous action
+creators:
 
 ```typescript
-import thunk from 'redux-thunk'
+// some-test-helpers.ts
+import thunk, {ThunkDispatch} from 'redux-thunk'
 import configureStore from 'redux-mock-store'
-import { AppState } from './types'
+import {AnyAction} from 'redux'
+import {AppState} from './types'    // Replace with your app state interface
 
 export const generateMockStore = (state: AppState) => {
   const mockStore = configureStore<AppState, ThunkDispatch<AppState, null, AnyAction>>([thunk])
   return mockStore(state)
 }
-```
 
-```typescript
+// myActionCreators.test.js
 describe('myAsyncActionCreator', () => {
   let store: ReturnType<typeof generateMockStore>
 
   beforeEach(() => {
-    store = generateMockStore(INITIAL_APP_STATE)
+    store = generateMockStore(MY_INITIAL_APP_STATE)
   })
 
-  it('should process the handle', async () => {
+  it('should do something', async () => {
     await store.dispatch(myAsyncActionCreator(request))
     const actions = store.getActions()
     expect(actions.length).toEqual(1)
@@ -131,19 +160,31 @@ describe('myAsyncActionCreator', () => {
 })
 ```
 
-8. Type-checked mocking modules in testing
+## Type-safe mocking
 
-jest shipped with mocking module.
+When testing action creators, it's common to mock out the modules that the
+action creators import. But it's kind of tricky to do it in a type-safe way,
+which apparently is not a problem in JavaScript. After some researching, I find
+a function that can safely do the type-conversion and make autocompletion tools
+work out of box.
 
 ```typescript
-impot { myOperation } from './myModule'
-
-jest.mock('./myModule');
-
-const 
-
 // some-test-helper.ts
-function mocked<T>(val: T): T extends (...args: any[]) => any ? jest.MockInstance<ReturnType<T>, Parameters<T>>: jest.Mocked<T> {
-  return val as any;
+function mocked<T>(val: T): T extends (...args: any[]) => any
+  ? jest.MockInstance<ReturnType<T>, Parameters<T>> & T
+  : jest.Mocked<T> {
+  return val as any
 }
+
+// myActionCreators.test.js
+impot { myAsyncOperation } from './myModule'
+
+jest.mock('./myModule')
+
+const mockedMyAsyncOperation = mocked(myAsyncOperation)
+
+// An example of returning a resolved promise.
+mockedMyAsyncOperation.mockResolvedValue({data: [1,2,3]})
 ```
+
+[redux-typescript-doc]: https://redux.js.org/recipes/usage-with-typescript
