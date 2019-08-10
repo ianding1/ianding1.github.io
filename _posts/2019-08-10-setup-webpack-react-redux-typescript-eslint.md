@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Setup Webpack + React + Redux + TypeScript + ESLint + Jest"
-date: 2019-08-08
+date: 2019-08-10
 tags: [web,typescript,react]
 banner_image: setup-webpack-react.jpg
 ---
