@@ -9,10 +9,10 @@
 title: "Ian's Website"
 
 # A description of your site for social meta tag, search engines, and feed.xml
-description: "Ian's blog on the principles and applications of programming languages and other things."
+description: "Techniques in C++, JavaScript, Java, Python, Web, Vim, etc."
 
 # Tagline near the site title
-tagline: "Keep it simple and sound."
+tagline: "Keep it simple."
 
 # The subpath of your site, e.g. /blog, for generating urls
 baseurl: ""
@@ -68,9 +68,8 @@ paginate_path: '/blog/page:num/'
 
 plugins:
 - jekyll-paginate
+- jekyll-sitemap
+- jekyll-seo-tag
 
 permalink: pretty
-markdown: redcarpet
-highlighter: pygments
-redcarpet:
-    extensions: ["no_intra_emphasis", "tables", "autolink", "strikethrough", "fenced_code_blocks", "disable_indented_code_blocks", "with_toc_data", "superscript", "underline", "highlight", "quote", "footnotes"]
+markdown: kramdown
