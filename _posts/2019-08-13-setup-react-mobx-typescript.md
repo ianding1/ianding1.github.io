@@ -164,7 +164,7 @@ const TodoListStore = types.model('TodoListStore', {
 
 ## Integrate MobX with React
 
-```typescript
+```tsx
 import { observer } from 'mobx-react'
 
 interface TodoItemProps {
@@ -184,7 +184,7 @@ const TodoItem: React.FC<TodoItemProps> = observer(({ todo }) => (  // B: observ
 - **B**: The functional component that reacts to the change of a model must be
   wrapped with *observer*.
 
-```typescript
+```tsx
 import { inject, observer, Provider } from 'mobx-react'
 
 interface TodoListProps {
