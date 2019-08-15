@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "React State Management In 2019"
+title: "Redux or not: Managing States in Vanilla React"
 date: 2019-08-14
 tags: [react,web]
 banner_image:
@@ -8,73 +8,91 @@ banner_image:
 
 Since the first day we learned React, we have been told not to *overuse* states
 in React. We are also encouraged to use *stateless* functional components over
-*stateful* class components. These suggestions easily lead to an apparent
-conclusion for beginners that *we shouldn't use states at all*, but rather, when
-we do need them, seek for some independent state management libraries like
-Redux.
+*stateful* class components.
 
-Good news is this is no longer true.
+These suggestions easily lead to an apparent conclusion for beginners that *we
+shouldn't use states at all*, but rather, when we do need them, seek for some
+independent state management libraries like Redux.
 
 <!--more-->
 
-The reasons why vanilla states were so widely hated can be summed up as follows:
+There were several reasons why we hated vanilla states so much:
 
 1. When the project gets larger, it soon becomes untrackable for the local
    states scattering in various different components.
 2. State sharing between components can be painful.
 3. Passing a prop from an outer component to a deeply nested component where the
-   prop is used can also be painful; it's called **prop
-   drilling** ([this article][prop-drilling] discussed prop drilling in detail).
-4. The stateful logic is usually mixed together with the UI renderer, which in
-   turn cause troubles in testing the stateful logic separately or reusing it in
-   other components.
+   prop is used can also be painful; it's called **prop drilling**.
+4. The stateful logic is usually mixed together with the UI renderer, making
+   itself hard to test or reuse.
 5. Class components are harder to be optimized than functional components during
    compilation.
 
-Technically, the third item is not an issue of states, but rather a high-level
-design question, which is usually caused by too many unnecessary decoupling of
-components. Nevertheless, it does cause troubles to day-to-day programming in
-React, and prevalent state management libraries usually present a proper
-solution to it.
+Strictly, prop drilling is not an issue of states, but rather a design
+defect; it is usually caused by too many unnecessary encapsulations.
+
+## The Pros and Cons of Redux
 
 Redux, a most popular state management library, alleviates the pain
-by separating the state from the UI and managing it in a central store. However,
-it also brings troubles. One of what people usually disapprove of is that it
-requires too much boilerplate code to set up the whole thing. Adding a new
-state, for example, usually involves modifications in a great many files and,
-when reading others' code, you need to constantly jump between multiple files to
-figure out how the stateful logic works.
+by separating the state from the UI and managing it in a central store.
 
-Just like any other open questions in the programming world, there is no silver
-bullet for state management. It is determined by the complexity of the business
-logic, the scale of the application and various factors in practice.
+The whole architecture is simple yet powerful. We can illustrate the mechanism
+behind Redux in a *unidirectional* flow:
 
-In this article, we will look at several state management approaches in 2019 and
-discuss briefly the pros and cons.
+{% include image_caption.html imageurl="/images/posts/redux-mechanism.svg" alt="Redux mechanism" %}
+
+Apart from the store itself, all the other components are *pure*, i.e. the
+result of the function *solely* depends on the function arguments and nothing
+else.
+
+A pure function is easier to test, understand and debug. By enforcing this
+*functional* paradigm, Redux reduces the load of maintaining the stateful logic
+behind the application.
+
+However, it also brings its own troubles. One of what people usually disapprove
+of is that it requires too much boilerplate code to set up the whole thing.
+
+This is especially troublesome for small projects. Adding a new action usually
+requires us to define a new action, add a new action creator, modify reducers,
+edit containers, and etc. We need to jump between several different files in
+order to get things done, expanding a simple task within 5 lines into more than
+20 lines.
+
+It's also debatable whether we should use a centralized store, just like whether
+we should use global variables.
+
+Compared to local states, global states are harder to reuse. Refactoring of a
+global state might cause unintended breaks in the code. And an inadequate use of
+Redux containers might also lead to performance issues.
+
+React, on the other hand, has made a great effort to ease the management of
+states in these years by introducing **Context API** and **Hooks**.
 
 ## Vanilla React
 
-In the past, React provided two different kinds of components: one is class
-components, supporting states and hooks (i.e. componentDidMount, etc.), the
-other functional components, not supporting these features.
+React has two different kinds of components: *class components*, which supports
+states and hooks (i.e. componentDidMount, etc.), and *functional components*,
+which not but much simpler.
 
-If we wanted to take advantage of functional component as well as maintaining
-app states, the only way was to turn to state management libraries like Redux.
+In the past, if we wanted to take advantage of functional components as well as
+managing an internal state, the only way was to turn to state management
+libraries like Redux.
 
-This is no longer true after React added *Context API* and *Hooks*. By making a
-proper use of these two new APIs, you probably don't need to use Redux in your
-new projects any more. Since they are officially part of the React framework, I
-would recommend at least take notice of them before deciding to use a
-third-party state management library instead.
+This is no longer true after React added Context API and hooks.
+
+Since they are officially part of the React framework, I would recommend at
+least take notice of them before deciding to use a third-party state management
+library instead.
 
 ### React Hooks
 
-React hooks are a way to **use states in functional components**. It seems very
-contradictory at first sight since *functional* to some extent means
-*stateless*. But let's put aside the relationship between them for the moment
-and focus on its role as a *design pattern*.
+React hooks API provides a way to **use states in functional components**.
 
-Compared to class components, functional components have a more concise form and
+It seems very contradictory at first sight, since *functional* to some extent
+means *stateless*. But let's put aside the relationship between them for the
+moment and focus on its role as a *design pattern*.
+
+Compared to class components, functional components have more concise forms and
 less boilerplate code. It's more readable, and for compilers easier to
 analyze and optimize.
 
@@ -82,28 +100,82 @@ However, forbidding using states in functional components can be really
 troublesome: introducing a state as negligible as a boolean forces us to
 rewrite the whole functional component in a class.
 
-React hooks saves us from this dilemma by allowing us to use states in a
+React hooks API saves us from this dilemma by allowing us to use states in a
 functional component. Moreover, it also allows us to separate the *stateful
-logic* from the *rendering logic* and *reuse* it in other components.
-For example, we can write a custom hook called *useTodoList* that manages the
-todo list state (i.e. creation, update and deletion of todo items) and use it in
-various components.
+logic* from the *rendering logic* and *reuse* it in other UI components.
 
-That being said, **everywhere setState is used, we can use React hooks
-instead**. It has a comprehensive improvement over setState by dividing the
-whole state of a component into smaller reusable parts and encouraging function
-components over class components.
+Here is a very simple example showing how to use React hooks in a functional
+component:
 
-However, the philosophy of React hooks is very different from that of Redux,
-which means you don't have to decide between the two. The former encourages
-*small local reusable* state components, while the latter *large centralized
-hierarchical* store. Since they are created for different use cases, we can use
-them together in a project.
+```tsx
+import React, { useState } from 'react'
 
-Although it's a design decision to which extent we should manage states in
-Redux, I would recommend **globalizing a state only when necessary**, since
-prematurely introducing the centralized store usually causes the whole project
-hard to maintain very soon.
+const Counter: React.FC = () => {
+  const [counter, setCounter] = useState(0)
+  return (
+    <div>
+      <p>Counter: {counter}</p>
+      <button onClick={() => setCounter(counter + 1)}>
+        Increment
+      </button>
+    </div>
+  )
+}
+```
+
+**useState** returns the current state and a function that can be used to update
+the state. The argument is the initial state. The first time it is called, it
+initialize the internal state of the component. And later it returns the
+internal state instead.
+
+The state is **local to the component** and not shared between two instances of
+the same component class.
+
+We can call useState multiple times in a functional component. React hooks API
+encourages us to decompose a complex state into smaller reusable states.
+
+We can go further and encapsulate the stateful logic in a separate function
+(i.e. **custom hook**) so that we can reuse it in different React
+components:
+
+```tsx
+import React, {useState} from 'react'
+
+// A custom hook
+const useCounter = (initial: number) => {
+  const [counter, setCounter] = useState(initial)
+
+  return {
+    counter,
+    increment () {
+      setCounter(counter + 1)
+    },
+    reset () {
+      setCounter(initial)
+    }
+  }
+}
+
+const Counter: React.FC = () => {
+  const { counter, increment, reset } = useCounter(0)
+  return (
+    <div>
+      <p>Counter: {counter}</p>
+      <button onClick={increment}>
+        Increment
+      </button>
+      <button onClick={reset}>
+        Reset
+      </button>
+    </div>
+  )
+}
+```
+
+**Everywhere setState is used, we can use React hooks instead**, since it has a
+comprehensive improvement over setState by dividing the whole state of a
+component into smaller reusable parts and encouraging function components over
+class components.
 
 ### React Context API
 
@@ -111,7 +183,7 @@ React Context API was created earlier than React hooks. But it aims at a
 different state management problem: *state sharing* and *prop drilling*.
 
 It might remind you of the purpose of Redux, but React Context API actually
-discourages from using it for maintaining a centralized store like Redux:
+discourages from using it for maintaining a gigantic centralized store:
 
 > Context is primarily used when some data needs to be accessible by many
 > components at different nesting levels. Apply it sparingly because it makes
@@ -126,12 +198,40 @@ Typical scenarios that React Context API is suitable for include:
 - UI themes;
 - Locale preferences.
 
-By properly combining React Context API with React hooks, we can manage app
-states **without using Redux at all**.
+For example, we can avoid passing the UI theme explicitly by wrapping it in a
+Context:
 
-## Redux
+```tsx
+import React, { useContext } from 'react'
 
+const ThemeContext = React.createContext('light')
 
-## MobX
+const UserComponent: React.FC = () => {
+  const theme = useContext(ThemeContext)
+  return (
+    <div>
+      Current theme: {theme}
+    </div>
+  )
+}
 
-[prop-drilling]: https://kentcdodds.com/blog/prop-drilling
+const App: React.FC = () => {
+  return (
+    <ThemeContext.Provider value="dark">
+      <UserComponent />
+    </ThemeContext.Provider>
+  )
+}
+
+```
+
+By properly combining React Context API with React hooks, we can manage
+application states **without using Redux at all**.
+
+However, just like any other open questions in the programming world, there is
+no silver bullet for state management. It is determined by the complexity of the
+business logic, the scale of the application and various factors.
+
+We should choose the most suitable in practice. And my preference is using React
+Context API and React hooks as a start, only employing Redux when it becomes
+necessary.
