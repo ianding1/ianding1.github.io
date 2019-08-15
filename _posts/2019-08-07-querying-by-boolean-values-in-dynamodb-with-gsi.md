@@ -15,6 +15,8 @@ One way to do it is to use *global secondary index*. However, indexing in
 DynamoDB is different from that in a relational database. Just migrating the
 knowledge of MySQL indexing to DynamoDB might cause some confusions.
 
+<!--more-->
+
 In DynamoDB, a *GSI* is very much like a table: It has its own partition key and
 sort key. It also splits its data into partitions. You can query a GSI but you
 must specify the partition key in the query operation, just like how you query a

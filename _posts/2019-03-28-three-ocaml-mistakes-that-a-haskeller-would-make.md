@@ -24,6 +24,8 @@ f [[3]; [4]]
 
 A Haskeller may think that the program above prints "d" to the screen, but actually it crashes because of the missing of patterns. Although most OCaml programs are written in a well-indented style, but, in essense, just like C or Java, the OCaml syntax is not indented. In the example above, the clause printing `"d"` belongs to the inner match expression, not the outer. **When writing nested match expressions, always keep in mind to use parentheses.**
 
+<!--more-->
+
 ```ocaml
 (* The correct program. *)
 let f l =

@@ -24,6 +24,8 @@ GitHub style to my blog, which you have already been reading.
 CSS.** I find the following posts and code very helpful and I would
 recommend reading them for further detail.
 
+<!--more-->
+
 - [Configuring
   Redcarpet](https://george-hawkins.github.io/basic-gfm-jekyll/redcarpet-extensions.html):
   How to use Redcarpet as your markdown renderer. The post itself is an

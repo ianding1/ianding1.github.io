@@ -16,6 +16,8 @@ the end of this tutorial, you will have:
 - Linting with *eslint*
 - Code formatting with *standard*
 
+<!--more-->
+
 ## Create a project
 
 ```sh

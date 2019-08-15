@@ -15,6 +15,8 @@ the source to the target?
 
 This problem is known as **max flow**.
 
+<!--more-->
+
 # Max flow
 
 The idea of solving a max flow problem is that each time we find a path from the

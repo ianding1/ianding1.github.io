@@ -8,6 +8,8 @@ banner_image: union-find-banner.jpg
 
 Assume that you have some nodes, each of which belongs to a group. How can you effectively check if two nodes are in the same group or merge two groups? UnionFind is a very fast algorithm to solve this problem. In this post, we first address how the UnionFind problem raises in a graph problem, then present the UnionFind algorithm, and analyze its time complexity in the end (which is optional).
 
+<!--more-->
+
 First, let's look at the minimum spanning tree problem.
 
 {% include image_caption.html imageurl="/images/posts/unionfind-mst.png" title="MST" caption="A Graph and Its Minimum Spanning Tree" %}

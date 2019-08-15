@@ -19,6 +19,8 @@ a common design without dependency injection, the business logic controller
 will create an instance of the data manager in its constructor, and the data
 manager do the same in its constructor to create a MySQL client as well.
 
+<!--more-->
+
 However, this approach has two significant drawbacks in practice:
 
 1. When writing unit tests, it's difficult to mock out the data manager in the

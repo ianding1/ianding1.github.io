@@ -13,6 +13,10 @@ conclusion for beginners that *we shouldn't use states at all*, but rather, when
 we do need them, seek for some independent state management libraries like
 Redux.
 
+Good news is this is no longer true.
+
+<!--more-->
+
 The reasons why vanilla states were so widely hated can be summed up as follows:
 
 1. When the project gets larger, it soon becomes untrackable for the local

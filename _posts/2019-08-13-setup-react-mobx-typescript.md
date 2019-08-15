@@ -21,6 +21,8 @@ which has the following features pre-configured out of box:
 - **Eslint**: checks bad programmatic habits, but doesn't enforce any coding
   style
 
+<!--more-->
+
 ## Install JavaScript Standard Style (Optional)
 
 Create-react-app doesn't enforce any coding styles, though it has eslint

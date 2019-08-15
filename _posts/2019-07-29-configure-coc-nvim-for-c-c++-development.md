@@ -19,6 +19,8 @@ configuration.
 
 For those who are not familiar with LSP, I think it's worth a brief intro.
 
+<!--more-->
+
 # Language Server Protocol
 
 {% include image_caption.html imageurl="/images/posts/lsp-model.svg" %}

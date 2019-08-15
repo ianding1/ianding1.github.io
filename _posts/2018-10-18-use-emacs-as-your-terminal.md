@@ -14,6 +14,8 @@ M-x eshell
 
 If you are new to eshell, be sure to check the following features that make eshell worth a trial:
 
+<!--more-->
+
 - You can run Emacs command directly; e.g. opening a file by `find-file`.
 {% highlight bash %}
 find-file foo.txt

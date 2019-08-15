@@ -21,6 +21,8 @@ Optional.ofNullable(aOrNull)
 **This is extremely useful to convert the traditional nullable reference to an
 `Optional` object.**
 
+<!--more-->
+
 ### 3. How can I get an empty `Optional<A>`?
 
 ```java
