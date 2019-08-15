@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Redux or not: Managing States in Vanilla React"
-date: 2019-08-14
+date: 2019-08-15
 tags: [react,web]
-banner_image:
+banner_image: redux-managing-states-in-vanilla-react.jpg
 ---
 
 Since the first day we learned React, we have been told not to *overuse* states
@@ -13,8 +13,6 @@ in React. We are also encouraged to use *stateless* functional components over
 These suggestions easily lead to an apparent conclusion for beginners that *we
 shouldn't use states at all*, but rather, when we do need them, seek for some
 independent state management libraries like Redux.
-
-<!--more-->
 
 There were several reasons why we hated vanilla states so much:
 
@@ -27,6 +25,8 @@ There were several reasons why we hated vanilla states so much:
    itself hard to test or reuse.
 5. Class components are harder to be optimized than functional components during
    compilation.
+
+<!--more-->
 
 Strictly, prop drilling is not an issue of states, but rather a design
 defect; it is usually caused by too many unnecessary encapsulations.
