@@ -4,6 +4,11 @@ title: "Redux or not: Managing States in Vanilla React"
 date: 2019-08-15
 tags: [react,web]
 banner_image: redux-managing-states-in-vanilla-react.jpg
+description: Redux, a most popular state management library, alleviates the pain
+  of state management in React applications, but also introduces its own
+  problems. On the other hand, with the development of new React APIs like
+  React hooks and Context API, it has become practical to manage states without
+  Redux at all.
 ---
 
 Since the first day we learned React, we have been told not to *overuse* states
