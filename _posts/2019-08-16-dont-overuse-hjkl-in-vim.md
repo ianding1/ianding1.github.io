@@ -88,5 +88,5 @@ Another problem is that it lacks *predictability* -- you don't know which key to
 press until the moment it prompts you. This could be a problem for muscle
 memory, since it requires additional visual--muscular coordination.
 
-Nevertheless, it's a good plugin worth a try. You can decide whether to keep it
-in your Vim configuration after trying by yourself.
+Nevertheless, it's a good plugin and definitely worth a try. You can decide
+whether to keep it in your Vim configuration after experimenting by yourself.
