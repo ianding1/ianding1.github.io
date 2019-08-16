@@ -29,7 +29,9 @@ similar command **e** that moves forward to *end* of next word.
 If there are too many punctuations in the line under cursor, then you might
 find **w** and **b** a little annoying, since each punctuation is regarded as an
 individual *word* (due to the definition that a word is a sequence of
-    alphabetic and digital characters, check out `:h iskeyword`).
+alphabetic and digital characters, check out `:h iskeyword`).
+
+<!--more-->
 
 Most of the time, I find **W**, **B** and **E** more convenient than their
 lowercase friends, because they regard a word as a sequence of characters
