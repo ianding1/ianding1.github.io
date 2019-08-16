@@ -8,19 +8,14 @@ banner_image: jekyll-banner.jpg
 
 I have spent a lot of time trying to find a Jekyll theme that is both elegant
 and readable. But unfortunately, most Jekyll themes is just so unreadable that
-your attention is easily distracted away from the content.
+the attention is easily distracted away from the content.
 
-I don't mean that they are not good-looking. To the contrary, some themes look
-quite modern, showing a distinguished taste of the blogger. However, it is not
-that good if the style overwhelms the content, especially for a technology blog,
-where any distraction seems to be a sin.
+I noticed that GitHub renders Markdown files in a very readable style. It is so
+natural that it takes no effort for the reader to pay all the attention to
+the content rather than the style. So I decided to migrate the GitHub style
+to my blog, which you have already been reading.
 
-Fortunately, I noticed that GitHub renders Markdown files in a very readable
-style. It is so natural that it takes no effort for the reader to pay all the
-attention to the content rather than the style. So I decided to migrate the
-GitHub style to my blog, which you have already been reading.
-
-**In a word, what we need is a GitHub-flavored markdown renderer and a GitHub
+**What we need is a GitHub-flavored markdown renderer and a GitHub
 CSS.** I find the following posts and code very helpful and I would
 recommend reading them for further detail.
 
@@ -40,15 +35,17 @@ recommend reading them for further detail.
 
 Here is a step-by-step tutorial of adopting the GitHub style to your blog:
 
-In your `_config.yml`, replace the markdown renderer with Redcarpet:
+In your `_config.yml`, replace the markdown renderer with ~~Redcarpet~~ kramdown:
 
 ```yaml
-redcarpet:
-    extensions: ["no_intra_emphasis", "tables", "autolink", "strikethrough", "with_toc_data"]
+# Use kramdown instead.
+# redcarpet:
+#     extensions: ["no_intra_emphasis", "tables", "autolink", "strikethrough", "with_toc_data"]
+markdown: kramdown
 ```
 
-If you didn't install Redcarpet in your system, then you should install it
-first.
+If you didn't have ~~Redcarpet~~ kramdown in your system, then you probably
+need to install it first with `gem install karmdown`.
 
 Download the [GitHub Markdown
 CSS](https://github.com/sindresorhus/github-markdown-css/blob/gh-pages/github-markdown.css)
@@ -86,5 +83,3 @@ Here is an example of the modified template:
 </div><!-- .entry-content -->
 ```
 {% endraw %}
-
-Congrats! You have made your blog much more readable!
