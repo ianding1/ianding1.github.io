@@ -1,31 +1,85 @@
 ---
 layout: post
-title: "Practical Bash Script Tutorial: Introduction"
+title: "Bash Scripting Tutorial for Programmers: Introduction"
 date: 2019-08-27
 tags: [Bash]
 banner_image:
 ---
-Bash scripts are commonly used in our daily life, but scarcely do we treat it as
-a *real* programming language.
+Bash is commonly used in our daily life, but scarcely do we treat it as
+an interpreter of a programming language, the Bash language.
 
-The most common practice might be adding to *PATH* the directory of a
-newly-installed program.
+The most frequently-used bash script might be *~/.bashrc*. We edit it every
+time we want to add to *PATH* the directory of a newly-installed program.
 
-Sometimes we might go one step further and put several commonly-executed
+Sometimes we might go one step further and put several repetitively-used
 commands into a Bash script so that we don't need to type the same commands over
 and over again, and that's it.
 
 If we need to do something more complicated, we usually turn to other script
 languages like Python.
 
-The idea of avoiding using Bash scripts for complex logics does make some sense,
-since Bash scripts are notoriously known for its bizarre syntax.
+But Bash can do more than that. Let's look at an example of using Bash for data
+processing.
 
-There are historical reasons why Bash scripts look so cumbersome.
+#### Example: Counting Occurrences
 
-Its syntax is derived from and composed of several various earlier shell
-scripts, even borrowed from C. That explains why the syntax of Bash scripts
-lacks uniformity.
+Given a text file *orders.txt*, we want to count the number of occurrences of
+each customer name in the file.
+
+```text
+# ORDER-ID   CUSTOMER TIMESTAMP             PRODUCT  QUANTITY
+1058531610   john     2019-07-26T14:31:51Z  10VANEF  1
+2017504121   thomas   2019-07-26T15:14:23Z  AN47SAM  3
+1756102147   john     2019-07-26T15:23:42Z  B9QN3QQ  2
+5917191328   dave     2019-07-26T15:29:36Z  89B6ZJK  6
+```
+
+The Bash command that does this job is:
+
+```bash
+cat orders.txt | grep -v '#' | tr -s ' ' | cut -f 2 -d ' ' | sort | uniq -c
+```
+
+The output of the command is:
+
+```text
+   1 dave
+   2 john
+   1 thomas
+```
+
+The command might look cryptic at first sight, but let's break it into multiple
+lines to improve readability and explain what each program does line by line.
+
+```bash
+# read orders.txt and feed it into the next program
+cat orders.txt  | \
+# remove all the lines starting with "#"
+grep -v '^#'    | \
+# replace repeated spaces with one space
+tr -s ' '       | \
+# select the second column (i.e. the customer names);
+# columns are separated by one space character
+cut -f 2 -d ' ' | \
+# sort lines alphabetically
+sort            | \
+# count occurrences of each unique line
+uniq -c
+```
+
+As is demonstrated above, when programming in Bash, we hardly do the *real* job
+by ourselves, such as sorting an array using *quicksort*. Instead, we combine
+various existing tools together and use the Bash language as the *glue*. That's
+where the magic of Bash programming comes from -- building up complex tools from
+simple ones.
+
+But scripting in Bash is hard, since the Bash language is notoriously known for
+its bizarre syntax.
+
+There are historical reasons why Bash look so cumbersome.
+
+Its syntax is derived from and composed of several various earlier shells, even
+borrowed from C. That explains why the syntax of Bash scripts lacks uniformity.
 
 Some constructs and built-ins were added long after the syntax had been fixed,
 so these "new" features must be implemented in a way not conflicting with
@@ -34,57 +88,57 @@ existing forms.
 The flavor of the syntax is kind of odd nowadays, but actually pretty common in
 the 90s. It looks very similar if you compare it with that of Perl and PHP.
 
-But we don't need to know all of Bash scripts in order to use it.
+The good news is that we don't need to know all of the Bash language in order to
+use it.
 
-In this tutorial, we've carefully picked a small subset of Bash script
-syntaxes that allow us to build up powerful tools consisting of conditional,
-loops and pipes. In my opinion, pipes are a feature in which Bash scripts are
-still superior than Python even now.
+In this tutorial, we've carefully picked a small subset of Bash syntaxes that
+allow us to build up powerful tools consisting of conditional, loops and pipes.
 
 Since it's essentially a *language* tutorial, not a *shell manual*, we
-won't get into the details of line-processing programs, *e.g.* **sed**, **awk**,
+won't get into the details of text-processing tools, *e.g.* **sed**, **awk**,
 **grep** and UNIX utilities, *e.g.* **sort**, **uniq**, **cut**.
 
-We've split the tutorial into several parts.
+We titled the tutorial as Bash Scripting Tutorial for *Programmers* because we
+want to talk about how to use Bash in the perspective of a programmer instead of
+a shell user. A programmer cares about how to define variables, conditionals,
+loops, functions and how to handle errors. That's the center of this tutorial.
+
+The tutorial is split into several parts.
 
 ### Introduction
 
-The reason why we learn Bash scripts.
+The reason why we learn Bash language.
 
 ### [Variables][chap1]
 
-1. How to define variables
-2. Single quotes *vs.* double quotes, and which we should
-   use
-3. How to read and print
+How to define variables, single quotes *vs.* double quotes, and which we should
+use, how to read from the user.
 
-### [Data Types][chap2]
+### [Integers and Arrays][chap2]
 
-1. How to define integers, arrays and associated arrays and use them
-2. How to do arithmetic operations
+How to define integers, arrays and use them, how to do arithmetic operations.
 
-### [Conditionals and Loops][chap2]
+### [Conditionals and Loops][chap3]
 
-1. How to use conditionals
-2. How to use loops
+How to use conditionals and loops, how to iterate over an array or a range.
 
-### [Functions and Subprocesses][chap3]
+### [Functions and Subprocesses][chap4]
 
-1. How to define functions and local variables
-2. How to spawn a subprocess and what's the different from a function
+How to define functions and local variables, how to spawn a subprocess and
+what's the different from a function.
 
-### [String Manipulations][chap4]
+### [String Manipulations][chap5]
 
-1. How to do pattern matching
-2. How to trim strings
+How to do pattern matching and trim strings.
 
-### [Redirections and Pipes][chap5]
+### [Redirections and Pipes][chap6]
 
-1. How to redirect *stdin*, *stdout*, and *stderr*
-2. How to connect various programs through *pipes* and make them work together
+How to redirect *stdin*, *stdout*, and *stderr* and connect various programs
+through *pipes* to make them work together.
 
 [chap1]: #
 [chap2]: #
 [chap3]: #
 [chap4]: #
 [chap5]: $
+[chap6]: $
