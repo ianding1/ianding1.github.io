@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Bash Scripting Tutorial for Programmers: Variables"
+title: "Bash Programming Tutorial: Variables"
 date: 2019-08-30
 tags: [bash]
-banner_image: bash-scripting-tutorial-for-programmers-variables.jpg
+banner_image: bash-programming-tutorial-variables.jpg
 ---
 
 ## Variables

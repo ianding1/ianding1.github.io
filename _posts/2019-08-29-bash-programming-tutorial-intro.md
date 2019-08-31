@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Bash Scripting Tutorial for Programmers: Introduction"
+title: "Bash Programming Tutorial: Introduction"
 date: 2019-08-29
 tags: [bash]
-banner_image: bash-scripting-tutorial-intro.png
+banner_image: bash-programming-tutorial-intro.png
 ---
 
 ### Overlooked Bash
@@ -107,9 +107,9 @@ Since it's essentially a *language* tutorial, not a *shell manual*, we
 won't get into the details of text-processing tools, *e.g.* **sed**, **awk**,
 **grep** and UNIX utilities, *e.g.* **sort**, **uniq**, **cut**.
 
-We titled the tutorial as Bash Scripting Tutorial for *Programmers* because we
-want to talk about how to use Bash in the perspective of a programmer instead of
-a shell user. A programmer cares about how to define variables, conditionals,
+We titled the tutorial as Bash *Programming* Tutorial because we want to
+talk about how to use Bash in the perspective of a programmer instead of a
+shell user. A programmer cares about how to define variables, conditionals,
 loops, functions and how to handle errors. That's the center of this tutorial.
 
 The tutorial is split into several parts.
@@ -126,4 +126,4 @@ The tutorial is split into several parts.
 - **Redirections and Pipes (WIP)** *stdin*/*stdout* redirection, pipes,
   composition of programs
 
-[var]: {% post_url 2019-08-30-bash-scripting-tutorial-for-programmers-variables %}
+[var]: {% post_url 2019-08-30-bash-programming-tutorial-variables %}
