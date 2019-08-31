@@ -1,10 +1,13 @@
 ---
 layout: post
 title: "Bash Scripting Tutorial for Programmers: Introduction"
-date: 2019-08-27
-tags: [Bash]
-banner_image:
+date: 2019-08-29
+tags: [bash]
+banner_image: bash-scripting-tutorial-intro.png
 ---
+
+### Overlooked Bash
+
 Bash is commonly used in our daily life, but scarcely do we treat it as
 an interpreter of a programming language, the Bash language.
 
@@ -21,7 +24,7 @@ languages like Python.
 But Bash can do more than that. Let's look at an example of using Bash for data
 processing.
 
-#### Example: Counting Occurrences
+### Example: counting occurrences
 
 Given a text file *orders.txt*, we want to count the number of occurrences of
 each customer name in the file.
@@ -33,6 +36,8 @@ each customer name in the file.
 1756102147   john     2019-07-26T15:23:42Z  B9QN3QQ  2
 5917191328   dave     2019-07-26T15:29:36Z  89B6ZJK  6
 ```
+
+<!--more-->
 
 The Bash command that does this job is:
 
@@ -73,7 +78,9 @@ various existing tools together and use the Bash language as the *glue*. That's
 where the magic of Bash programming comes from -- building up complex tools from
 simple ones.
 
-But scripting in Bash is hard, since the Bash language is notoriously known for
+### Bizarre syntax
+
+Scripting in Bash is hard, since the Bash language is notoriously known for
 its bizarre syntax.
 
 There are historical reasons why Bash look so cumbersome.
@@ -87,6 +94,8 @@ existing forms.
 
 The flavor of the syntax is kind of odd nowadays, but actually pretty common in
 the 90s. It looks very similar if you compare it with that of Perl and PHP.
+
+### Our approach
 
 The good news is that we don't need to know all of the Bash language in order to
 use it.
@@ -105,40 +114,16 @@ loops, functions and how to handle errors. That's the center of this tutorial.
 
 The tutorial is split into several parts.
 
-### Introduction
+- **Introduction** the reason why we learn the Bash language
+- **[Variables][var]** variables, single quotes *vs.* double quotes
+- **Integers and Arrays (WIP)** integers, arrays, arithmetic operations
+- **Conditionals and Loops (WIP)** *if*, *case*, *for*, *while* statements
+- **Reading from Users (WIP)** reading from the keyboard, command line
+  arguments
+- **Functions and Subprocesses (WIP)** functions, local variables,
+  subprocesses
+- **String Manipulations (WIP)** pattern matching, string trimming
+- **Redirections and Pipes (WIP)** *stdin*/*stdout* redirection, pipes,
+  composition of programs
 
-The reason why we learn Bash language.
-
-### [Variables][chap1]
-
-How to define variables, single quotes *vs.* double quotes, and which we should
-use, how to read from the user.
-
-### [Integers and Arrays][chap2]
-
-How to define integers, arrays and use them, how to do arithmetic operations.
-
-### [Conditionals and Loops][chap3]
-
-How to use conditionals and loops, how to iterate over an array or a range.
-
-### [Functions and Subprocesses][chap4]
-
-How to define functions and local variables, how to spawn a subprocess and
-what's the different from a function.
-
-### [String Manipulations][chap5]
-
-How to do pattern matching and trim strings.
-
-### [Redirections and Pipes][chap6]
-
-How to redirect *stdin*, *stdout*, and *stderr* and connect various programs
-through *pipes* to make them work together.
-
-[chap1]: #
-[chap2]: #
-[chap3]: #
-[chap4]: #
-[chap5]: $
-[chap6]: $
+[var]: {% post_url 2019-08-30-bash-scripting-tutorial-for-programmers-variables %}
