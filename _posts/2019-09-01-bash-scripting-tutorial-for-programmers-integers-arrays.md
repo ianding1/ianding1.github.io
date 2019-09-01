@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Bash Scripting Tutorial for Programmers: Integers and Arrays"
-date: 2019-08-29
+date: 2019-09-01
 tags: [bash]
-banner_image:
+banner_image: bash-programming-tutorial-integer.jpg
 ---
 
 ## Integers
