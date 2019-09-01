@@ -116,7 +116,7 @@ The tutorial is split into several parts.
 
 - **Introduction** the reason why we learn the Bash language
 - **[Variables][var]** variables, single quotes *vs.* double quotes
-- **Integers and Arrays (WIP)** integers, arrays, arithmetic operations
+- **[Integers and Arrays][int]** integers, arrays, arithmetic operations
 - **Conditionals and Loops (WIP)** *if*, *case*, *for*, *while* statements
 - **Reading from Users (WIP)** reading from the keyboard, command line
   arguments
@@ -127,3 +127,4 @@ The tutorial is split into several parts.
   composition of programs
 
 [var]: {% post_url 2019-08-30-bash-programming-tutorial-variables %}
+[int]: {% post_url 2019-09-01-bash-programming-tutorial-integers-arrays %}
