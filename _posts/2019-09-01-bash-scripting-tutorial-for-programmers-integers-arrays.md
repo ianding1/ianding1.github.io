@@ -53,6 +53,8 @@ echo "$((3 + 5))"           # Prints 8
 echo "$((3 > 2 && 5 < 10))" # Prints 1
 ```
 
+<!--more-->
+
 In *arithmetic operations*, Bash treats zero as *false* and non-zero values as
 *true*, following the convention of C. However, when handling the *exit code* of
 commands, it treats **zero** as *success* (*i.e.* true) and all **non-zero**
