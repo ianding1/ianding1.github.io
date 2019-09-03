@@ -5,15 +5,19 @@ description: About this blog and the author maintaining it
 banner_image: about_banner.jpg
 ---
 
-I'm Ian, and I have been maintaining this blog since 2018. I wrote this blog to
-sum up what I have learned recently. In my opinion, writing is the best way of
-learning, since it naturally requires one to organize the knowledge in one's
-head. And sometimes I spent several days on some quirk problems, I think it's
-also a good idea to write up a post to summarize how I solved it and hope it
-could help anyone who meets the same problem as I did.
+Hi, I'm Ian. I have been maintaining this blog since 2018. I'm glad to share
+with you in my personal website what I've learned recently.
 
-The images in this blog are either made by myself or downloaded from the free
-image website [Pixabay](https://pixabay.com).
+The tag line of this website is a Latin phrase: *simplex sigillum veri*. It
+means *simplicity is the sign of truth*. Martin Kleppmann quotes the following
+phrase in his book *Designing Data-Intensive Applications*, indicating that this
+idiom also applies to software development:
 
-My email is **ianding1 *AT* icloud *DOT* com**. Please don't hesitate to email
-me if you want to share your opinions with me.
+> A complex system that works is invariably found to have evolved from a simple
+> system that works. The inverse proposition also appears to be true: A
+> complex system designed from scratch never works and cannot be made to work.
+>
+> -- John Gall, *Systemantics*
+
+If you want to share with me about your opinions or comments, please send an
+email to [ianding1@icloud.com](mailto:ianding1@icloud.com).
