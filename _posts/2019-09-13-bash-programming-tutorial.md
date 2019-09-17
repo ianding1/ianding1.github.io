@@ -650,23 +650,247 @@ done
 
 ## Reading from the user
 
-TBD
+The built-in command to read from the user is `read`.
+
+```bash
+read varname
+```
+
+Read a line from the standard input and store it in variable *varname*. The
+newline character is not saved in *varname*.
+
+```bash
+read -p "Enter your name: " username
+```
+
+Display the prompt and then read a line from the standard input.
+
+```bash
+read -s password
+```
+
+Read a line without echoing. It can be used to read passwords from the user.
+
+```bash
+read name gender
+```
+
+If the input is `Thomas Male`, then after reading the input, *name* will be
+`Thomas` and *gender* will be `Male`.
+
+The rule is that the input string is split into words with **IFS** (which is
+whitespaces and tabs by default), assigning each word to each variable in order,
+and assigning the rest to the last variable.
+
+Backslashes can be used to escape IFS characters, *e.g.*, `foo\ bar` is
+considered as a word.
+
+```
+read -a arrayname
+```
+
+Read a line and store it as an array. If the input is `foo bar`, then the array
+will contains two elements, one is `foo` and the other `bar`.
+
+```bash
+while read line ; do
+  echo "$line"
+done
+```
+
+Read line by line from the standard input until reaching end of file or the user
+presses `Ctrl-D`.
+
+```bash
+cat orders.txt | while read customer product ; do
+  echo "$customer purchased $product"
+done
+```
+
+Process *orders.txt* line by line. The standard input can be redirected to the
+output of another command.
 
 ## Functions
 
-TBD
+Functions are like embedded scripts in Bash scripts, but not exactly, since
+functions are run in the same process (compared to subprocesses, which are run
+in a separate process).
+
+The example below defines a function called *compress* that runs the **tar**
+command to compress files and directories.
+
+```bash
+compress () {
+  local target=$1
+  local source=$2
+  tar -cjvf "${target}.tar.bz2" "${source}"
+}
+```
+
+Local variables in a function should be declared with the **local** keyword. If
+the variable is not declared with **local**, it will be treated as a global
+variable. Assigning to a variable not declared with **local** might overwrite
+the value of a global variable with the same name.
+
+The function body can access function arguments in the same way that the script
+access command-line arguments, *e.g.*, via `$1`, `$2` and `$@`.
+
+A function is also invoked in the same manner as a command. For example, to
+  compress directory *foo* into *foobar.tar.bz2*:
+
+```bash
+compress foobar foo
+```
+
+The standard input and output of a function can be redirected as well. The
+following example redirects the output of the function to a file.
+
+```bash
+get_password () {
+  local result
+  read -s -p "Password: " result
+  echo "$result"
+}
+
+get_password > password.txt
+```
+
+Functions can have return values. The return value can be used in the *if*
+statement, for example:
+
+```bash
+trivial () {
+  return 0
+}
+
+if trivial ; then
+  echo "It's trivially true"
+fi
+```
 
 ## Subprocesses
 
-TBD
+Instead of running commands in the current process, we can run some commands in
+a separate subprocess. The way we run commands in a separate process is to
+surround the commands between `(` and `)`, for example:
+
+```bash
+# The cd command doesn't change the working directory of the parent process.
+(cd foo ; make)
+```
+
+There are several reason why we want to run commands in a subprocess:
+
+1. What happens in the subprocess won't affect the parent process. In the
+   example above, the change of the working directory only has an influence on
+   the command in the subprocess itself, *i.e.*, the **make** command.
+2. If the subprocess exits prematurely, it won't terminate the parent process.
+3. We can capture the output of the subprocess into a variable. See the example
+   below that captures the output of **ls -al** and saves it into variable
+   *res*:
+
+```bash
+res=$(ls -al)
+```
+
+## Environment Variables
+
+All Bash variables are not environment variables.
+
+If we only define a Bash variable `MY_ENV=3` without exporting it, it won't be
+passed down to subprocesses.
+
+To make a Bash variable an environment variable, we need to **export** it at
+least once.
+
+Although it's common to assign an environment variable while exporting it, doing
+so is not necessary.
+
+```bash
+# Approach 1
+export MY_ENV=3
+
+# Equivalent Approach 2
+MY_ENV=3
+export MY_ENV
+```
+
+If we want to specify an environment variable for only one command, we can embed
+the assignment of the environment variable in that command. For example:
+
+```bash
+NODE_ENV=test node app.js
+```
 
 ## Redirections
 
-TBD
+There are three standard files opened at the start of every command: *standard
+input*, *standard output* and *standard error*, corresponding to file descriptor
+0, 1, and 2.
+
+By default, the standard input is the keyboard, and the standard output/error is
+the screen. But we can redirect them to disk files, named pipes, and even other
+processes via pipes.
+
+```bash
+mycmd < input.txt
+```
+
+Redirect the standard input to *input.txt*.
+
+```bash
+mycmd > output.log
+```
+
+Redirect the standard output to *output.log*. If the file exists, clear the
+content of the file first.
+
+```bash
+mycmd >> output.log
+```
+
+Redirect the standard output to *output.log*, appending to the file.
+
+```bash
+mycmd 2> error.log
+```
+
+Redirect the standard error to *error.log*.
+
+```bash
+mycmd 2>&1
+```
+
+Redirect the standard error to the standard output.
 
 ## Pipes
 
-TBD
+Besides redirecting standard input/output to disk files, Bash also supports
+redirecting the output of a command to the input of another via the pipe
+operator `|`. This allows us to connect multiple simple commands together to do
+complex jobs.
+
+The following example prints the lines containing "ERR" in file *myprog.log* and
+saves the result to another file *errors.txt*:
+
+```bash
+cat myprog.log | grep "ERR" > errors.txt
+```
+
+The exit code of the whole pipeline is the exit code of the last command. This
+has the problem that even if an intermediate command fails, the whole pipeline
+is still regarded as being executed successfully.
+
+To make our Bash script less prone to mistakes, we can have the whole pipeline
+fail if any of the commands fails by adding the line below to our script:
+
+```bash
+set -o pipefail
+```
+
+[Writing Safe Shell Scripts][safe-shell] introduces many practical advices that
+avoid potential errors in Bash programming.
 
 [bash-cond-expr]: https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html
 [bash-pat-match]: https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html
+[safe-shell]: https://sipb.mit.edu/doc/safe-shell/
