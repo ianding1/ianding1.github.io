@@ -87,11 +87,11 @@ backslashes:
 touch foo\ bar
 ```
 
-If there are many spaces in the argument, *e.g.* "foo bar   baz", we need to
+If there are many spaces in the argument, *e.g.* "foo bar baz", we need to
 escape all of them. The result can be really unreadable:
 
 ```bash
-touch foo\ bar\ \ \ baz
+touch foo\ bar\ baz
 ```
 
 Instead, Bash allows us to escape *a range of characters* with single quotes,
@@ -99,7 +99,7 @@ treating all the spaces surrounded by the pair of single quotes as ordinary
 characters.
 
 ```bash
-touch 'foo bar   baz'
+touch 'foo bar baz'
 ```
 
 Surprisingly, these single quotation marks can indeed appear anywhere, even in
@@ -109,8 +109,8 @@ quotation marks as delimiters of string literals.
 
 ```bash
 # This is essentially equivalent to
-# touch 'foo bar   baz'
-touch foo' 'bar'   b'az
+# touch 'foo bar baz'
+touch foo' 'bar' b'az
 ```
 
 We can also use double quotes to prevent Bash from splitting the argument.
