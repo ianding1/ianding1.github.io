@@ -652,24 +652,32 @@ done
 
 The built-in command to read from the user is `read`.
 
+### Read a line
+
 ```bash
 read varname
 ```
 
-Read a line from the standard input and store it in variable *varname*. The
+Read a line from standard input and store it in variable *varname*. The
 newline character is not saved in *varname*.
+
+### Display prompts
 
 ```bash
 read -p "Enter your name: " username
 ```
 
-Display the prompt and then read a line from the standard input.
+Display the prompt and then read a line from standard input.
+
+### Read passwords without echoing
 
 ```bash
 read -s password
 ```
 
 Read a line without echoing. It can be used to read passwords from the user.
+
+### Read into multiple variables
 
 ```bash
 read name gender
@@ -685,6 +693,8 @@ and assigning the rest to the last variable.
 Backslashes can be used to escape IFS characters, *e.g.*, `foo\ bar` is
 considered as a word.
 
+### Read into an array
+
 ```
 read -a arrayname
 ```
@@ -692,14 +702,18 @@ read -a arrayname
 Read a line and store it as an array. If the input is `foo bar`, then the array
 will contains two elements, one is `foo` and the other `bar`.
 
+### Process line by line
+
 ```bash
 while read line ; do
   echo "$line"
 done
 ```
 
-Read line by line from the standard input until reaching end of file or the user
+Read line by line from standard input until reaching end of file or the user
 presses `Ctrl-D`.
+
+### Read from redirected input
 
 ```bash
 cat orders.txt | while read customer product ; do
@@ -707,7 +721,7 @@ cat orders.txt | while read customer product ; do
 done
 ```
 
-Process *orders.txt* line by line. The standard input can be redirected to the
+Process *orders.txt* line by line. standard input can be redirected to the
 output of another command.
 
 ## Functions
@@ -742,7 +756,7 @@ A function is also invoked in the same manner as a command. For example, to
 compress foobar foo
 ```
 
-The standard input and output of a function can be redirected as well. The
+standard input and output of a function can be redirected as well. The
 following example redirects the output of the function to a file.
 
 ```bash
@@ -828,47 +842,57 @@ There are three standard files opened at the start of every command: *standard
 input*, *standard output* and *standard error*, corresponding to file descriptor
 0, 1, and 2.
 
-By default, the standard input is the keyboard, and the standard output/error is
-the screen. But we can redirect them to disk files, named pipes, and even other
+By default, standard input is the keyboard, and standard output/error is the
+screen. But we can redirect them to disk files, named pipes, and even other
 processes via pipes.
+
+### Redirect standard input
 
 ```bash
 mycmd < input.txt
 ```
 
-Redirect the standard input to *input.txt*.
+Redirect standard input to *input.txt*.
+
+### Redirect standard output
 
 ```bash
 mycmd > output.log
 ```
 
-Redirect the standard output to *output.log*. If the file exists, clear the
+Redirect standard output to *output.log*. If the file exists, clear the
 content of the file first.
+
+### Appending to a file
 
 ```bash
 mycmd >> output.log
 ```
 
-Redirect the standard output to *output.log*, appending to the file.
+Redirect standard output to *output.log*, appending to the file.
+
+### Redirect standard error
 
 ```bash
 mycmd 2> error.log
 ```
 
-Redirect the standard error to *error.log*.
+Redirect standard error to *error.log*.
+
+### Redirect standard error to standard output
 
 ```bash
 mycmd 2>&1
 ```
 
-Redirect the standard error to the standard output.
+Redirect standard error to standard output.
 
 ## Pipes
 
 Besides redirecting standard input/output to disk files, Bash also supports
-redirecting the output of a command to the input of another via the pipe
-operator `|`. This allows us to connect multiple simple commands together to do
-complex jobs.
+redirecting standard output of a command to standard input of another via the
+pipe operator `|`. This allows us to connect multiple simple commands together
+to do complex jobs.
 
 The following example prints the lines containing "ERR" in file *myprog.log* and
 saves the result to another file *errors.txt*:
