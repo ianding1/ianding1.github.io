@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic" />
     <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css" />
@@ -35,7 +35,7 @@
                     <a class="{{ current }}" href="{{ link.url }}">{{ link.text }}</a>
                   </li>
                 {% endfor %}
-                </ul>        
+                </ul>
             </div><!-- .nav-menu -->
             <a class="subscribe-button fa-feed square fill-horizontal" href="{{site.baseurl}}/feed.xml"><span class="screen-reader-text">Subscribe</span></a>
         </div><!-- .inner -->
@@ -51,5 +51,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ site.baseurl }}/js/plugins.js"></script>
     <script type="text/javascript" src="{{ site.baseurl }}/js/custom.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"></script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+    inlineMath: [['$', '$'], ['\\(','\\)']],
+    processEscapes: true},
+    jax: ["input/TeX","input/MathML","input/AsciiMath","output/CommonHTML"],
+    extensions: ["tex2jax.js","mml2jax.js","asciimath2jax.js","MathMenu.js","MathZoom.js","AssistiveMML.js", "[Contrib]/a11y/accessibility-menu.js"],
+    TeX: {
+        extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+        equationNumbers: {
+            autoNumber: "AMS"
+        }
+    }
+});
+</script>
 </body>
 </html>
